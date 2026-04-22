@@ -38,7 +38,6 @@ async def handle(message: types.Message):
 
         if code == "071930":
 
-            # 📁 ОТПРАВКА ФАЙЛА (ТВОЯ ССЫЛКА)
             await message.answer_document(
                 document="https://raw.githubusercontent.com/vyjdg45nxq-cpu/detective-bot/main/IMG_3781.jpeg",
                 caption="📁 ДЕЛО 071930\n\nДоступ получен"
@@ -47,4 +46,12 @@ async def handle(message: types.Message):
         else:
             await message.answer("❌ Дело не найдено")
 
-        user_state[message.from_user.id] =
+        # ✔ правильно сбрасываем состояние
+        user_state[message.from_user.id] = None
+        return
+
+    await message.answer("Выберите действие через меню 👇")
+
+
+if __name__ == "__main__":
+    executor.start_polling(dp, skip_updates=True)
