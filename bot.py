@@ -17,7 +17,7 @@ user_state = {}
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
     user_state[message.from_user.id] = None
-    await message.answer("🗂 Добро пожаловать в систему архива", reply_markup=kb)
+    await message.answer("🗂 Добро пожаловать в систему БСМЭ", reply_markup=kb)
 
 @dp.message_handler(lambda m: m.text == "📨 Консультация")
 async def consult(message: types.Message):
