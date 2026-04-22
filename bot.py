@@ -12,7 +12,6 @@ dp = Dispatcher(bot)
 kb = ReplyKeyboardMarkup(resize_keyboard=True)
 kb.add("📁 Архив", "📨 Консультация")
 
-# состояние пользователя
 user_state = {}
 
 @dp.message_handler(commands=['start'])
@@ -20,19 +19,16 @@ async def start(message: types.Message):
     user_state[message.from_user.id] = None
     await message.answer("🗂 Добро пожаловать в систему архива", reply_markup=kb)
 
-# КОНСУЛЬТАЦИЯ
 @dp.message_handler(lambda m: m.text == "📨 Консультация")
 async def consult(message: types.Message):
     user_state[message.from_user.id] = None
     await message.answer("❗ В ближайшее время свободных окон нет")
 
-# АРХИВ
 @dp.message_handler(lambda m: m.text == "📁 Архив")
 async def archive(message: types.Message):
     user_state[message.from_user.id] = "archive"
     await message.answer("🔎 Введите номер дела:")
 
-# ОБРАБОТКА ВВОДА
 @dp.message_handler()
 async def handle(message: types.Message):
     state = user_state.get(message.from_user.id)
@@ -41,11 +37,13 @@ async def handle(message: types.Message):
         code = message.text.strip()
 
         if code == "071930":
-            # отправка изображения
-            await message.answer_photo(
-                photo="https://i.imgur.com/your_image.jpg",
+
+            # 📁 ОТПРАВКА ФАЙЛА
+            await message.answer_document(
+                document="https://example.com/your_file.pdf",
                 caption="📁 ДЕЛО 071930\n\nДоступ получен"
             )
+
         else:
             await message.answer("❌ Дело не найдено")
 
