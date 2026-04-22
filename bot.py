@@ -36,6 +36,7 @@ async def handle(message: types.Message):
     if state == "archive":
         code = message.text.strip()
 
+        # 📁 ДЕЛО 071930
         if code == "071930":
 
             await message.answer_document(
@@ -43,10 +44,18 @@ async def handle(message: types.Message):
                 caption="📁 ДЕЛО 071930\n\nДоступ получен"
             )
 
+        # 📁 ДЕЛО 6329857 (НОВОЕ)
+        elif code == "6329857":
+
+            await message.answer_document(
+                document="https://raw.githubusercontent.com/vyjdg45nxq-cpu/detective-bot/refs/heads/main/PNG%20image.png",
+                caption="📁 ДЕЛО 6329857\n\nДоступ получен"
+            )
+
         else:
             await message.answer("❌ Дело не найдено")
 
-        # ✔ правильно сбрасываем состояние
+        # ✔ сброс состояния
         user_state[message.from_user.id] = None
         return
 
