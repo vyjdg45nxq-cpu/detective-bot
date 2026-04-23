@@ -27,7 +27,7 @@ async def consult(message: types.Message):
 @dp.message_handler(lambda m: m.text == "📁 Архив")
 async def archive(message: types.Message):
     user_state[message.from_user.id] = "archive"
-    await message.answer("🔎 Введите номер дела:")
+    await message.answer("🔎 Введите номер документа:")
 
 @dp.message_handler()
 async def handle(message: types.Message):
